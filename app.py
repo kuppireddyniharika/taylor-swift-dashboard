@@ -16,6 +16,7 @@ if common_cols:
     df = pd.merge(df1, df2, on=common_cols[0], how="inner")
 else:
     df = df1.copy()
+    st.write(df.columns)
 
 def find_column(names):
     for col in names:
