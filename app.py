@@ -16,7 +16,7 @@ if common_cols:
     df = pd.merge(df1, df2, on=common_cols[0], how="inner")
 else:
     df = df1.copy()
-    st.write(df.columns)
+   
 
 def find_column(names):
     for col in names:
@@ -30,9 +30,16 @@ streams_col = find_column(['streams'])
 popularity_col = find_column(['popularity'])
 energy_col = find_column(['energy'])
 
-df[streams_col] = df[streams_col].fillna(0)
-df[popularity_col] = df[popularity_col].fillna(0)
-df[energy_col] = df[energy_col].fillna(0)
+if streams_col:
+    df[streams_col] = df[streams_col].fillna(0)
+
+if popularity_col:
+    df[popularity_col] = df[popularity_col].fillna(0)
+
+if energy_col:
+    df[energy_col] = df[energy_col].fillna(0)
+else:
+    st.warning("⚠️ Energy column not found")
 
 st.title("🎤 Taylor Swift Dashboard")
 
